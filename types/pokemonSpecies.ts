@@ -1,3 +1,5 @@
+import type { NamedAPIResource } from "./common";
+
 interface PokemonSpecies {
   base_happiness: number;
   capture_rate: number;
@@ -26,11 +28,6 @@ interface PokemonSpecies {
   pokedex_numbers: PokemonSpeciesDexEntry[];
   shape: NamedAPIResource | null;
   varieties: Variety[];
-}
-
-interface NamedAPIResource {
-  name: string;
-  url: string;
 }
 
 interface Name {
