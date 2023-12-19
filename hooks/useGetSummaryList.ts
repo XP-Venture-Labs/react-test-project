@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const useGetSummaryList = (page: number) => {
   const [summaryList, setSummaryList] = useState<PokemonSummary[]>([]);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -20,6 +21,7 @@ const useGetSummaryList = (page: number) => {
           return (await pokemonSpeciesResponse.json()) as PokemonSpecies;
         })
       );
+      setTotalPage(Math.ceil(pokedex.count / 15));
       setSummaryList(
         pokemonSpecies.map(
           ({
@@ -49,7 +51,10 @@ const useGetSummaryList = (page: number) => {
     fetchSummary();
   }, [page]);
 
-  return { summaryList };
+  return {
+    summaryList,
+    totalPage,
+  };
 };
 
 export { useGetSummaryList };

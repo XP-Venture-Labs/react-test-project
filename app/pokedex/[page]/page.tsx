@@ -1,13 +1,18 @@
 "use client";
 
+import PaginationBar from "@/components/paginationBar";
 import { SummaryCell } from "@/components/summaryCell";
 import { useGetSummaryList } from "@/hooks/useGetSummaryList";
 import { Table } from "flowbite-react";
-import { useState } from "react";
 
-export default function Home() {
-  const [page, setPage] = useState(1);
-  const { summaryList } = useGetSummaryList(page);
+export default function Home({
+  params: { page },
+}: {
+  params: { page: string };
+}) {
+  const { summaryList, totalPage } = useGetSummaryList(
+    +page
+  );
 
   return (
     <main className="flex min-h-screen flex-col justify-between p-12">
@@ -34,6 +39,7 @@ export default function Home() {
           </Table.Body>
         </Table>
       </div>
+      <PaginationBar currentPage={+page} totalPage={totalPage} />
     </main>
   );
 }
