@@ -1,5 +1,6 @@
 import { Table } from "flowbite-react";
 import type { PokemonSummary } from "@/types/pokemonSummary";
+import Link from "next/link";
 
 interface SummaryCellProps {
   summary: PokemonSummary;
@@ -22,7 +23,11 @@ const SummaryCell = ({
     <Table.Cell>
       <img alt={name} height={100} src={imageUrl} width={100} />
     </Table.Cell>
-    <Table.Cell>{name}</Table.Cell>
+    <Table.Cell>
+      <Link className="underline" href={`/pokemon/${id}`}>
+        {name}
+      </Link>
+    </Table.Cell>
     <Table.Cell>{color.name}</Table.Cell>
     <Table.Cell>{growth_rate.name}</Table.Cell>
     <Table.Cell>{base_happiness}</Table.Cell>
